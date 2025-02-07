@@ -1,0 +1,23 @@
+{
+  "name": "api-admin",
+  "version": "1.0.0",
+  "description": "Api para mi administracion vhga",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorGlez97/api-admin.git"
+  },
+  "keywords": [
+    "Api",
+    "administración"
+  ],
+  "author": "VHGA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictorGlez97/api-admin/issues"
+  },
+  "homepage": "https://github.com/VictorGlez97/api-admin#readme"
+}
