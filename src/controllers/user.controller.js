@@ -52,7 +52,7 @@ const userController = {
             
             const { name, username, email, acive, role } = req.body
 
-            const sql = 'UPDATE users set name = $1, username = $2, email = $3, active = $4, role = $5 WHERE iduser = $6 RETURNING *'
+            const sql = 'UPDATE users set name = $1, username = $2, email = $3, active = $4, role = $5 WHERE iduser = $6 RETURNING iduser, name, email, active, role'
 
             const { rows } = await postgre.query(sql, [name, username, email, acive, role, req.params.id])
 
@@ -70,7 +70,7 @@ const userController = {
 
             const passwordHashed = encryptPassword(password);
 
-            const sql = 'UPDATE users set password = $1 WHERE iduser = $2 RETURNING *'
+            const sql = 'UPDATE users set password = $1 WHERE iduser = $2 RETURNING iduser, name, email, active, role'
     
             const { rows } = await postgre.query(sql, [passwordHashed, req.params.id])
 
