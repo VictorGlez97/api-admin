@@ -29,7 +29,8 @@ CREATE TABLE trades(
   total DECIMAL(10,2),
   dateIn TIMESTAMP NOT NULL,
   dateOut TIMESTAMP,
-  bank INT REFERENCES banks(idbank)
+  bank INT REFERENCES banks(idbank),
+  comment TEXT
 )
 
 SELECT enumlabel AS type_movs
