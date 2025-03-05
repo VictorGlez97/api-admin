@@ -3,9 +3,18 @@ const cors = require('cors');
 // const fs = require('fs');
 // const path = require('path');
 
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
+
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Acceso bloqueado'));
+    }
+}));
 
 require('dotenv').config()
 
