@@ -30,7 +30,9 @@ CREATE TABLE trades(
   dateIn TIMESTAMP NOT NULL,
   dateOut TIMESTAMP,
   bank INT REFERENCES banks(idbank),
-  comment TEXT
+  comment TEXT,
+  hour trade_hour NOT NULL DEFAULT 'Nueva York',
+  active BOOLEAN DEFAULT true
 )
 
 SELECT enumlabel AS type_movs
@@ -50,3 +52,5 @@ CREATE TABLE banks(
   usr INT REFERENCES users(iduser),
   active BOOLEAN DEFAULT true
 )
+
+CREATE TYPE trade_hour AS ENUM ('Nueva York', 'Londres', 'Tokio', 'Sidney');

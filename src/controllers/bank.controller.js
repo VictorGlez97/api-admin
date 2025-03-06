@@ -4,7 +4,8 @@ const bankController = {
 
     getByUser: async( req, res ) => {
         try {
-            const { rows } = await postgre.query('SELECT idbank, name, start, finish, amount, active FROM banks WHERE usr = $1', [req.params.id])
+            console.log(req.params.id);
+            const { rows } = await postgre.query('SELECT b.idbank, b.name FROM banks b INNER JOIN users u ON b.usr = u.iduser WHERE U.username = $1', [req.params.id])
             res.json({msg: 'OK', data: rows})
         } catch (error) {
             res.status(500).json({msg: error.msg})
