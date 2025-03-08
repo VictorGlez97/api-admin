@@ -1,11 +1,14 @@
 const express = require('express')
-const cors = require('cors');
+const cors = require('cors')
 // const fs = require('fs');
 // const path = require('path');
+const cookieParser = require('cookie-parser')
 
 const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
 
 const app = express()
+
+app.use(cookieParser())
 
 app.use(cors({
     origin: function (origin, callback) {

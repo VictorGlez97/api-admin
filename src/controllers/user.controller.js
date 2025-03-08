@@ -1,10 +1,20 @@
 const postgre = require('../db/database')
+
 const { comparePassword, encryptPassword } = require('../helpers/password')
+const { getToken } = require('../helpers/jwt')
 
 const userController = {
 
     getAll: async( req, res ) => {
         try {
+
+            const { dataUsr } = req; 
+            // console.log( dataUsr );
+
+            if ( dataUsr.role !== 'admin' ) {
+                return res.json({ error: true, msg: 'No tienes los permisos requeridos!' });
+            }
+
             const { rows } = await postgre.query('SELECT iduser, name, username, email, active, role FROM users')
             res.json({msg: 'OK', data: rows})
         } catch (error) {
@@ -31,6 +41,11 @@ const userController = {
     create: async( req, res ) => {
         try {
             
+            const { dataUsr } = req; 
+            if ( dataUsr.role !== 'admin' ) {
+                return res.json({ error: true, msg: 'No tienes los permisos requeridos!' });
+            }
+
             const { name, username, email, password, active, role } = req.body
 
             const password_hashed = await encryptPassword(password);
@@ -87,7 +102,7 @@ const userController = {
             
             const { username, password } = req.body;
 
-            const sql = 'SELECT username, password, name, role, email FROM users WHERE username = $1'
+            const sql = 'SELECT iduser, username, password, name, role, email FROM users WHERE username = $1'
 
             const { rows } = await postgre.query(sql, [username]);
 
@@ -102,7 +117,19 @@ const userController = {
             }
 
             delete rows[0].password;
-            return res.status(200).json({msg: `Bienvenid@ ${rows[0].name}!`, user: rows[0], error: false});
+            delete rows[0].email;
+
+            const token = getToken(rows[0]);
+
+            delete rows[0].iduser;
+            delete rows[0].role;
+            
+            return res.status(200).json({
+                msg: `Bienvenid@ ${rows[0].name}!`, 
+                user: rows[0], 
+                token: token, 
+                error: false
+            });
 
         } catch (error) {
             console.log(error);
