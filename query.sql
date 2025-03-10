@@ -54,3 +54,11 @@ CREATE TABLE banks(
 )
 
 CREATE TYPE trade_hour AS ENUM ('Nueva York', 'Londres', 'Tokio', 'Sidney');
+
+CREATE TABLE portofolio(
+  idporto INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL, 
+  mail VARCHAR(255),
+  phone VARCHAR(20),
+  message TEXT
+)

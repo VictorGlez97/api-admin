@@ -31,10 +31,16 @@ const dictionaryRouter = require('./src/routers/dictionary.router')
 const bankRouter = require('./src/routers/bank.router')
 const tradeRouter = require('./src/routers/trade.router')
 
+// PORTOFOLIO
+const portofolio = require('./src/routers/portofolio.router')
+
 app.use('/api', userRouter)
 app.use('/api', dictionaryRouter)
 app.use('/api', bankRouter)
 app.use('/api', tradeRouter)
+
+// PORTOFOLIO
+app.use('/api', portofolio)
 
 app.listen(process.env.PORT, () => {
     console.log(`SERVER IS RUNNING ON PORT ${process.env.PORT}`)
