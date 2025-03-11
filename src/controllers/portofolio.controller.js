@@ -7,12 +7,20 @@ const portofolioController = {
         try {
             
             const { name, mail, phone, message } = req.body;
+            const data = req.body;
+
+            const pathTemplate = path.join(`${__dirname}`, '../', 'templates', 'email.html');
+            const htmlTemplate = fs.readFileSync(pathTemplate, 'utf-8');
+            
+            const template = handlebars.compile(htmlTemplate);
+            const htmlToSend = template(data);
 
             const mailOptions = {
                 from: process.env.YAHOO_USER,
                 to: process.env.EMAIL_SEND,
                 subject: 'Llenado contacto portofolio',
-                text: `Se ha llenado el foemulario de contactos con los siguientes datos: <br/> Nombre: '${name}' <br/> Telefono: '${phone}' <br/> Correo: '${mail}' <br/><br/> El mensaje es el siguiente: '${message}'`
+                // text: `Se ha llenado el foemulario de contactos con los siguientes datos: <br/> Nombre: '${name}' <br/> Telefono: '${phone}' <br/> Correo: '${mail}' <br/><br/> El mensaje es el siguiente: '${message}'`
+                html: htmlToSend
             }
         
             const info = await transporter.sendMail(mailOptions)

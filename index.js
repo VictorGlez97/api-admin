@@ -4,20 +4,28 @@ const cors = require('cors')
 // const path = require('path');
 const cookieParser = require('cookie-parser')
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
+// const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
 
 const app = express()
 
 app.use(cookieParser())
 
+app.use(cors())
+
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
-        return callback(new Error('Acceso bloqueado'));
-    }
-}));
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             return callback(null, true);
+//         }
+//         return callback(new Error('Acceso bloqueado'));
+//     }
+// }));
 
 require('dotenv').config()
 

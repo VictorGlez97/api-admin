@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Mensaje de Contacto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        .info {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            background: #f1f8ff;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Nuevo Mensaje de Contacto</h2>
+        <p>Has recibido un mensaje a través de tu portafolio:</p>
+
+        <div class="info">
+            <strong>Nombre:</strong> {{name}}
+        </div>
+        <div class="info">
+            <strong>Teléfono:</strong> {{phone}}
+        </div>
+        <div class="info">
+            <strong>Correo Electrónico:</strong> <a href="mailto:{{mail}}">{{mail}}</a>
+        </div>
+        <div class="info">
+            <strong>Mensaje:</strong>
+            <p>{{message}}</p>
+        </div>
+
+        <p class="footer">Este mensaje fue enviado desde tu portafolio.</p>
+    </div>
+</body>
+</html>
