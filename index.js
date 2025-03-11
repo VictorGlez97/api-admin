@@ -12,11 +12,11 @@ app.use(cookieParser())
 
 app.use(cors())
 
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}))
+// app.use(cors({
+//     origin: '*',
+//     methods: ['GET', 'POST', 'PUT'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// }))
 
 // app.use(cors({
 //     origin: function (origin, callback) {
