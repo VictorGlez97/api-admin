@@ -124,6 +124,8 @@ const userController = {
             delete rows[0].iduser;
             delete rows[0].role;
             
+            rows[0]['token'] = token;
+
             return res.status(200).json({
                 msg: `Bienvenid@ ${rows[0].name}!`, 
                 user: rows[0], 
