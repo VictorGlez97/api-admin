@@ -11,6 +11,16 @@ const tradeController = {
     //     }
     // },
 
+    // getByBank: async( req, res ) => {
+    //     try {
+            
+    //         const { rows: banks } = await postgre.query('SELECT ')
+
+    //     } catch (error) {
+    //         res.status(500).json({ error: true, msg: error })
+    //     }
+    // },
+
     getById: async( req, res ) => {
         try {
             
