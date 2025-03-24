@@ -1,6 +1,11 @@
 const postgre = require('../db/database');
 const { transporter } = require('../helpers/mail');
 
+const nodemailer = require('nodemailer')
+const handlebars = require('handlebars')
+const fs = require('fs')
+const path = require('path');
+
 const portofolioController = {
 
     sendEmail: async( req, res ) => {
@@ -8,6 +13,8 @@ const portofolioController = {
             
             const { name, mail, phone, message } = req.body;
             const data = req.body;
+
+            console.log( __dirname );
 
             const pathTemplate = path.join(`${__dirname}`, '../', 'templates', 'email.html');
             const htmlTemplate = fs.readFileSync(pathTemplate, 'utf-8');
@@ -37,6 +44,7 @@ const portofolioController = {
             return res.status(402).json({ error: true, msg: 'No fue posible hacer el envio del mensaje' })
 
         } catch (error) {
+            console.log( error );
             return res.status(500).json({ error: true, msg: error })
         }
     }
