@@ -25,7 +25,7 @@ const portofolioController = {
         
             const info = await transporter.sendMail(mailOptions)
 
-            // console.log( info );
+            console.log( info );
 
             if ( info.response === '250 OK , completed' ) {
                 const { rows } = await postgre.query('INSERT INTO portofolio(name, mail, phone, message) VALUES($1, $2, $3, $4) RETURNING *', [name, mail, phone, message])
@@ -37,7 +37,7 @@ const portofolioController = {
             return res.status(402).json({ error: true, msg: 'No fue posible hacer el envio del mensaje' })
 
         } catch (error) {
-            return res.status(500).json({ error: true, msg: error.msg })
+            return res.status(500).json({ error: true, msg: error })
         }
     }
 
