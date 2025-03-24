@@ -25,8 +25,7 @@ const portofolioController = {
             const mailOptions = {
                 from: process.env.YAHOO_USER,
                 to: process.env.EMAIL_SEND,
-                subject: 'Llenado contacto portofolio',
-                // text: `Se ha llenado el foemulario de contactos con los siguientes datos: <br/> Nombre: '${name}' <br/> Telefono: '${phone}' <br/> Correo: '${mail}' <br/><br/> El mensaje es el siguiente: '${message}'`
+                subject: 'MENSAJE PORTOFOLIO!',
                 html: htmlToSend
             }
         
