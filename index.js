@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser')
 
 // const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
 
+const swaggerDocs = require('./src/swagger')
+
 const app = express()
 
 app.use(cookieParser())
@@ -51,6 +53,8 @@ app.use('/api/', dashboard)
 
 // PORTOFOLIO
 app.use('/api', portofolio)
+
+swaggerDocs(app);
 
 app.listen(process.env.PORT, () => {  
     console.log(`SERVER IS RUNNING ON PORT ${process.env.PORT}`)
