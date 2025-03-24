@@ -6,7 +6,12 @@ const cookieParser = require('cookie-parser')
 
 // const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
 
+
 // const swaggerDocs = require('./src/swagger')
+
+// AUT
+const swaggerUi = require("swagger-ui-express")
+const swaggerFile = require("./src/swagger-output.json")
 
 const app = express()
 
@@ -34,6 +39,9 @@ require('dotenv').config()
 app.use(express.json())
 
 app.use(express.static('public'))
+
+// AUT
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // ROUTERS
 const userRouter = require('./src/routers/user.router')
