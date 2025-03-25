@@ -14,8 +14,8 @@ const app = express()
 
 const allowedOrigins = [
     'https://vhga.vercel.app',
+    'http://localhost:5173',
     'https://vhga-victorglez97s-projects.vercel.app',
-    'http://localhost:5173'
 ]
 
 // app.use(cors())
@@ -28,6 +28,8 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
+        console.log( origin );
+        console.log( allowedOrigins.includes(origin) );
         if (!origin || allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
