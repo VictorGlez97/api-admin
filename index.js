@@ -18,13 +18,13 @@ const app = express()
 //     'https://vhga-victorglez97s-projects.vercel.app',
 // ]
 
-// app.use(cors())
+app.use('*', cors())
 
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}))
+// app.use(cors({
+//     origin: '*',
+//     methods: ['GET', 'POST', 'PUT'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// }))
 
 // app.use(cors({
 //     origin: function (origin, callback) {
