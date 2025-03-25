@@ -7,35 +7,35 @@ const cookieParser = require('cookie-parser')
 // const swaggerDocs = require('./src/swagger')
 
 // AUT
-const swaggerUi = require("swagger-ui-express")
-const swaggerFile = require("./src/swagger-output.json")
+// const swaggerUi = require("swagger-ui-express")
+// const swaggerFile = require("./src/swagger-output.json")
 
 const app = express()
 
-const allowedOrigins = [
-    'https://vhga.vercel.app',
-    'http://localhost:5173',
-    'https://vhga-victorglez97s-projects.vercel.app',
-]
+// const allowedOrigins = [
+//     'https://vhga.vercel.app',
+//     'http://localhost:5173',
+//     'https://vhga-victorglez97s-projects.vercel.app',
+// ]
 
 // app.use(cors())
 
-// app.use(cors({
-//     origin: '*',
-//     methods: ['GET', 'POST', 'PUT'],
-//     allowedHeaders: ['Content-Type', 'Authorization']
-// }))
-
 app.use(cors({
-    origin: function (origin, callback) {
-        console.log( origin );
-        console.log( allowedOrigins.includes(origin) );
-        if (!origin || allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
-        return callback(new Error('Acceso bloqueado'));
-    }
-}));
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         console.log( origin );
+//         console.log( allowedOrigins.includes(origin) );
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             return callback(null, true);
+//         }
+//         return callback(new Error('Acceso bloqueado'));
+//     }
+// }));
 
 require('dotenv').config()
 
@@ -46,7 +46,7 @@ app.use(express.json())
 app.use(express.static('public'))
 
 // AUT
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // ROUTERS
 const userRouter = require('./src/routers/user.router')
