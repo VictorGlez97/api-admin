@@ -4,8 +4,7 @@ const cors = require('cors')
 // const path = require('path');
 const cookieParser = require('cookie-parser')
 
-// const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
-
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'https://vhga.vercel.app', 'https://vhga-victorglez97s-projects.vercel.app']
 
 // const swaggerDocs = require('./src/swagger')
 
@@ -25,14 +24,14 @@ app.use(cors())
 //     allowedHeaders: ['Content-Type', 'Authorization']
 // }))
 
-// app.use(cors({
-//     origin: function (origin, callback) {
-//         if (!origin || allowedOrigins.includes(origin)) {
-//             return callback(null, true);
-//         }
-//         return callback(new Error('Acceso bloqueado'));
-//     }
-// }));
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Acceso bloqueado'));
+    }
+}));
 
 require('dotenv').config()
 
