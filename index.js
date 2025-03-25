@@ -4,8 +4,6 @@ const cors = require('cors')
 // const path = require('path');
 const cookieParser = require('cookie-parser')
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'https://vhga.vercel.app', 'https://vhga-victorglez97s-projects.vercel.app']
-
 // const swaggerDocs = require('./src/swagger')
 
 // AUT
@@ -14,9 +12,13 @@ const swaggerFile = require("./src/swagger-output.json")
 
 const app = express()
 
-app.use(cookieParser())
+const allowedOrigins = [
+    'https://vhga.vercel.app',
+    'https://vhga-victorglez97s-projects.vercel.app',
+    'http://localhost:5173'
+]
 
-app.use(cors())
+// app.use(cors())
 
 // app.use(cors({
 //     origin: '*',
@@ -34,6 +36,8 @@ app.use(cors({
 }));
 
 require('dotenv').config()
+
+app.use(cookieParser())
 
 app.use(express.json())
 
