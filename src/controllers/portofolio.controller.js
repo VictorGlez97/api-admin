@@ -14,7 +14,7 @@ const portofolioController = {
             const { name, mail, phone, message } = req.body;
             const data = req.body;
 
-            console.log( __dirname );
+            // console.log( __dirname );
 
             const pathTemplate = path.join(`${__dirname}`, '../', 'templates', 'email.html');
             const htmlTemplate = fs.readFileSync(pathTemplate, 'utf-8');
@@ -31,7 +31,7 @@ const portofolioController = {
         
             const info = await transporter.sendMail(mailOptions)
 
-            console.log( info );
+            // console.log( info );
 
             if ( info.response === '250 OK , completed' ) {
                 const { rows } = await postgre.query('INSERT INTO portofolio(name, mail, phone, message) VALUES($1, $2, $3, $4) RETURNING *', [name, mail, phone, message])

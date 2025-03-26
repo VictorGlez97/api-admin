@@ -12,13 +12,24 @@ const cookieParser = require('cookie-parser')
 
 const app = express()
 
-// const allowedOrigins = [
-//     'https://vhga.vercel.app',
-//     'http://localhost:5173',
-//     'https://vhga-victorglez97s-projects.vercel.app',
-// ]
+const allowedOrigins = [
+    'https://vhga.vercel.app',
+    'http://localhost:5173',
+    'https://vhga-victorglez97s-projects.vercel.app',
+]
 
-app.use('*', cors())
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Acceso bloqueado por CORS'));
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// app.use('*', cors())
 
 // app.use(cors({
 //     origin: '*',
