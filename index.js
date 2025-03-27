@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 // const fs = require('fs');
 // const path = require('path');
-const cookieParser = require('cookie-parser')
 
 // const swaggerDocs = require('./src/swagger')
 
@@ -12,21 +12,17 @@ const cookieParser = require('cookie-parser')
 
 const app = express()
 
-const allowedOrigins = [
-    'https://vhga.vercel.app',
-    'http://localhost:5173',
-    'https://vhga-victorglez97s-projects.vercel.app',
-]
+const allowedOrigins = ['https://vhga.vercel.app', 'http://localhost:5173'];
 
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
-        return callback(new Error('Acceso bloqueado por CORS'));
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+        return callback(new Error('Acceso bloqueado por CORS, el origin no coincide con lista de origins permitidos'));
+    }
+    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    // allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // app.use('*', cors())
@@ -60,23 +56,24 @@ app.use(express.static('public'))
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // ROUTERS
+// PORTOFOLIO
+const portofolio = require('./src/routers/portofolio.router')
+
 const userRouter = require('./src/routers/user.router')
 const dictionaryRouter = require('./src/routers/dictionary.router')
 const bankRouter = require('./src/routers/bank.router')
 const tradeRouter = require('./src/routers/trade.router')
 const dashboard = require('./src/routers/dashboard.router')
 
+
 // PORTOFOLIO
-const portofolio = require('./src/routers/portofolio.router')
+app.use('/api', portofolio)
 
 app.use('/api', userRouter)
 app.use('/api', dictionaryRouter)
 app.use('/api', bankRouter)
 app.use('/api', tradeRouter)
 app.use('/api/', dashboard)
-
-// PORTOFOLIO
-app.use('/api', portofolio)
 
 // swaggerDocs(app);
 
@@ -90,3 +87,22 @@ app.listen(process.env.PORT, () => {
 //     }
 //     return process.env.NEXT_PUBLIC_VERCEL_URL;
 // }
+
+app.get('/', ( req, res ) => {
+    res.send(`
+        <html>
+            <head>
+                <title> API Administracion </title>
+                <style>
+                body { font-family: Arial, sans-serif; text-align: center; background-color: #FFF; }
+                h2 { color: #339CFF; }
+                p { font-size: 18px; color: #333; }
+                </style>
+            </head>
+            <body>
+                <h2> Bienvenidos a la api de administración! </h2>
+                <p> acceso restringido </p>
+            </body>
+        </html>
+    `)
+})
